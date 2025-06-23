@@ -1,0 +1,58 @@
+package com.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.util.Scanner;
+
+public class InsertDataPrepared {
+
+	public static void main(String[] args)throws Exception {
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/school","root","root");
+		
+		String q="Insert into student(sid,sname,age,city,blood_group,contact_number)values(?,?,?,?,?,?)";
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the id");
+		int id =sc.nextInt();
+		
+		System.out.println("Enter the name");
+		String name = sc.next();
+		
+		System.out.println("Enter the age");
+		 int age = sc.nextInt();
+		
+		System.out.println("Enter the city");
+		String city = sc.next();
+		
+		System.out.println("Enter the blood_group");
+		String blood_group = sc.next();
+		
+		System.out.println("Enter the contact_number");
+		String contact_number= sc.next();
+		
+		
+		
+		PreparedStatement stmt = con.prepareStatement(q);
+		
+		
+		stmt.setInt(1,1);
+		stmt.setString(2,"Amit");
+		stmt.setInt(3,22);
+		stmt.setString(4,"palus");
+		stmt.setString(5,"AB+");
+		stmt.setString(6,"8694939839");
+		
+		stmt.executeUpdate();
+		
+		System.out.println("Data inserted succesfully");
+		
+		con.close();
+		
+		
+
+	}
+
+}
